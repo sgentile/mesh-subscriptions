@@ -1,0 +1,5 @@
+sources:
+  - name: MessageService
+    handler:
+      graphql:
+        endpoint: http://localhost:9001/graphql
