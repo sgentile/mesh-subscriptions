@@ -26,10 +26,10 @@ export declare type Scalars = {
     Int: number;
     Float: number;
 };
-export declare type Query = {
-    getMessages: Array<Message>;
-};
 export declare type Message = {
+    content: Scalars['String'];
+};
+export declare type MessageInput = {
     content: Scalars['String'];
 };
 export declare type Mutation = {
@@ -38,8 +38,8 @@ export declare type Mutation = {
 export declare type MutationcreateNewMessageArgs = {
     messageInput: MessageInput;
 };
-export declare type MessageInput = {
-    content: Scalars['String'];
+export declare type Query = {
+    getMessages: Array<Message>;
 };
 export declare type Subscription = {
     newMessage: Message;
@@ -74,26 +74,23 @@ export declare type NextResolverFn<T> = () => Promise<T>;
 export declare type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs = {}> = (next: NextResolverFn<TResult>, parent: TParent, args: TArgs, context: TContext, info: GraphQLResolveInfo) => TResult | Promise<TResult>;
 /** Mapping between all available schema types and the resolvers types */
 export declare type ResolversTypes = ResolversObject<{
-    Query: ResolverTypeWrapper<{}>;
     Message: ResolverTypeWrapper<Message>;
     String: ResolverTypeWrapper<Scalars['String']>;
-    Mutation: ResolverTypeWrapper<{}>;
     MessageInput: MessageInput;
+    Mutation: ResolverTypeWrapper<{}>;
+    Query: ResolverTypeWrapper<{}>;
     Subscription: ResolverTypeWrapper<{}>;
     Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 }>;
 /** Mapping between all available schema types and the resolvers parents */
 export declare type ResolversParentTypes = ResolversObject<{
-    Query: {};
     Message: Message;
     String: Scalars['String'];
-    Mutation: {};
     MessageInput: MessageInput;
+    Mutation: {};
+    Query: {};
     Subscription: {};
     Boolean: Scalars['Boolean'];
-}>;
-export declare type QueryResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-    getMessages?: Resolver<Array<ResolversTypes['Message']>, ParentType, ContextType>;
 }>;
 export declare type MessageResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Message'] = ResolversParentTypes['Message']> = ResolversObject<{
     content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -102,13 +99,16 @@ export declare type MessageResolvers<ContextType = MeshContext, ParentType exten
 export declare type MutationResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
     createNewMessage?: Resolver<ResolversTypes['Message'], ParentType, ContextType, RequireFields<MutationcreateNewMessageArgs, 'messageInput'>>;
 }>;
+export declare type QueryResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+    getMessages?: Resolver<Array<ResolversTypes['Message']>, ParentType, ContextType>;
+}>;
 export declare type SubscriptionResolvers<ContextType = MeshContext, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = ResolversObject<{
     newMessage?: SubscriptionResolver<ResolversTypes['Message'], "newMessage", ParentType, ContextType>;
 }>;
 export declare type Resolvers<ContextType = MeshContext> = ResolversObject<{
-    Query?: QueryResolvers<ContextType>;
     Message?: MessageResolvers<ContextType>;
     Mutation?: MutationResolvers<ContextType>;
+    Query?: QueryResolvers<ContextType>;
     Subscription?: SubscriptionResolvers<ContextType>;
 }>;
 import { MeshContext as BaseMeshContext, MeshInstance } from '@graphql-mesh/runtime';

@@ -7,11 +7,11 @@ schema {
   subscription: Subscription
 }
 
-type Query {
-  getMessages: [Message!]!
+type Message {
+  content: String!
 }
 
-type Message {
+input MessageInput {
   content: String!
 }
 
@@ -19,8 +19,8 @@ type Mutation {
   createNewMessage(messageInput: MessageInput!): Message!
 }
 
-input MessageInput {
-  content: String!
+type Query {
+  getMessages: [Message!]!
 }
 
 type Subscription {
