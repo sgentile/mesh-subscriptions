@@ -12,7 +12,7 @@ import { MessageResolver } from './message.resolver';
       subscriptions: {
         'graphql-ws': true,
       },
-      // installSubscriptionHandlers: true,   // <--- works with playground use this instead of graphql-ws
+      // installSubscriptionHandlers: true, // <--- works with playground use this instead of graphql-ws
       typePaths: ['./**/*.graphql'],
       definitions: {
         path: join(process.cwd(), 'src/graphql.ts'),
