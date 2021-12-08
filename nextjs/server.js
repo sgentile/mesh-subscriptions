@@ -86,42 +86,42 @@ async function handler() {
     );
 
     // GRAPHQL-WS
-    if (process.env.USE_WS) {
-      // create and use the websocket server
-      const path = "/subscriptions";
-      const wsServer = new ws.Server({
-        server,
-        path,
-      });
+    // if (process.env.USE_WS) {
+    // create and use the websocket server
+    const path = "/subscriptions";
+    const wsServer = new ws.Server({
+      server,
+      path,
+    });
 
-      useServer(
-        {
-          schema,
-          execute,
-          subscribe,
-          onConnect: (ctx) => {
-            console.log("Connect");
-          },
-          onSubscribe: (ctx, msg) => {
-            console.log("Subscribe");
-          },
-          onNext: (ctx, msg, args, result) => {
-            console.debug("Next");
-          },
-          onError: (ctx, msg, errors) => {
-            console.error("Error");
-          },
-          onComplete: (ctx, msg) => {
-            console.log("Complete");
-          },
+    useServer(
+      {
+        schema,
+        execute,
+        subscribe,
+        onConnect: (ctx) => {
+          console.log("Connect");
         },
-        wsServer
-      );
-      const wsAddress = wsServer.address();
-      console.log(
-        `[${process.env.NODE_ENV}] WebSockets listening on ws://localhost:${wsAddress.port}${path}`
-      );
-    }
+        onSubscribe: (ctx, msg) => {
+          console.log("Subscribe");
+        },
+        onNext: (ctx, msg, args, result) => {
+          console.debug("Next");
+        },
+        onError: (ctx, msg, errors) => {
+          console.error("Error");
+        },
+        onComplete: (ctx, msg) => {
+          console.log("Complete");
+        },
+      },
+      wsServer
+    );
+    const wsAddress = wsServer.address();
+    console.log(
+      `[${process.env.NODE_ENV}] WebSockets listening on ws://localhost:${wsAddress.port}${path}`
+    );
+    // }
   });
 }
 
