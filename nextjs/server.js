@@ -3,6 +3,7 @@ const express = require("express");
 const http = require("http");
 const { getBuiltMesh } = require("./.mesh");
 const next = require("next");
+
 const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev });
 const port = process.env.APP_PORT || 4444;

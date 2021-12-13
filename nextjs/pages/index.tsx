@@ -71,8 +71,10 @@ const Home: NextPage = () => {
       </Grid>
       <Grid container item direction="column">
         <Grid item>Messages</Grid>
-        {currentChatMessages?.map((chatMessage: ChatMessage) => (
-          <Grid item>{chatMessage.content}</Grid>
+        {currentChatMessages?.map((chatMessage: ChatMessage, index) => (
+          <Grid item key={index}>
+            {chatMessage.content}
+          </Grid>
         ))}
       </Grid>
     </Grid>
