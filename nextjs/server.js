@@ -9,7 +9,6 @@ const port = process.env.APP_PORT || 4444;
 
 async function main() {
   const expressApp = express();
-  // expressApp.use
 
   // Bootstrap Apollo Server
   // Use Apollo server as express middleware through 'applyMiddleware'
