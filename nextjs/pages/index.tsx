@@ -3,14 +3,8 @@ import { Button, Grid, TextField } from "@mui/material";
 import gql from "graphql-tag";
 import type { NextPage } from "next";
 import React, { useState } from "react";
-import styles from "../styles/Home.module.css";
 interface ChatMessage {
   content: string;
-}
-
-interface ChatGroup {
-  groupId: string;
-  name: string | null;
 }
 
 const createNewMessageMutation = gql`
@@ -34,11 +28,8 @@ const Home: NextPage = () => {
     []
   );
 
-  const currentChatGroup = { groupId: "testGroupId", name: "testGroup" };
-  const [userName, setUserName] = useState("Test Chat User");
   const [messageInput, setMessageInput] = useState("");
 
-  const APP_ID = "testAppId";
   const [createNewMessage] = useMutation(createNewMessageMutation, {
     onError: (error): void => {
       console.error({ error });
@@ -60,9 +51,8 @@ const Home: NextPage = () => {
 
   useSubscription(newMessageSubscription, {
     fetchPolicy: "network-only",
-    // variables: { groupId: currentChatGroup?.groupId, appId: APP_ID },
     onSubscriptionData: (d) => {
-      console.log("sub data", d);
+      console.log("Subscription Data recieved:", d);
       setCurrentChatMessages([
         ...currentChatMessages,
         d.subscriptionData.data.newMessage,
@@ -70,17 +60,22 @@ const Home: NextPage = () => {
     },
   });
   return (
-    <div className={styles.container}>
+    <Grid container>
       <Grid item>
         <TextField size={"small"} onChange={handleMessageChange}></TextField>
       </Grid>
-      <Button onClick={sendMessage} variant="contained">
-        Send Message
-      </Button>
-      {currentChatMessages?.map(
-        (chatMessage: ChatMessage) => chatMessage.content
-      )}
-    </div>
+      <Grid item>
+        <Button onClick={sendMessage} variant="contained">
+          Send Message
+        </Button>
+      </Grid>
+      <Grid container item direction="column">
+        <Grid item>Messages</Grid>
+        {currentChatMessages?.map((chatMessage: ChatMessage) => (
+          <Grid item>{chatMessage.content}</Grid>
+        ))}
+      </Grid>
+    </Grid>
   );
 };
 

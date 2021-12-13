@@ -1,4 +1,3 @@
-// import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import {
   ApolloClient,
   ApolloProvider,
@@ -15,8 +14,7 @@ import "../styles/globals.css";
 const wsLink = process.browser
   ? new WebSocketLink({
       // if you instantiate in the server, the error will be thrown
-      // uri: `ws://localhost:4444/graphql`,
-      uri: `ws://0.0.0.0:4444/graphql`,
+      uri: `ws://localhost:4444/graphql`,
       options: {
         reconnect: true,
       },
@@ -31,7 +29,7 @@ const httplink = new HttpLink({
 const link =
   wsLink && process.browser
     ? split(
-        //only create the split in the browser
+        // only create the split in the browser
         // split based on operation type
         ({ query }) => {
           const definition = getMainDefinition(query);
