@@ -1,86 +1,32 @@
-### Install
+This is a [Next.js](https://nextjs.org/) project with a custom Apollo Server that supports subscriptions.
 
-run npm install in api and gateway folders
+The project layout was inspired by [this monorepo implementation](https://github.com/givehug/devto-monorepo)
 
-cd into the api folder
 
-start the api (if you want to run helix, goto helix-api folder)
+<img width="500" alt="Screen Shot 2021-12-08 at 2 46 51 PM" src="https://user-images.githubusercontent.com/12603953/145904206-aaade306-ce71-4d92-9cb7-d960b17c8fd0.png">
 
-```
-npm start
-```
 
-goto the playground:
-http://0.0.0.0:9001/graphql
 
-in one tab create the subscription listener
+## Getting Started
 
-```
-subscription messages {
-  newMessage {
-    content
-  }
-}
+First, run the development server:
+
+```bash
+npm run dev
 ```
 
-in another tab create a message
+Open [http://localhost:4444](http://localhost:4444) with your browser to see the result.
 
-```
-mutation createMessage {
-  createNewMessage(messageInput: {content: "New Message"}){
-    content
-  }
-}
-```
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-expected result in subscription tab:
+Graphql Playground can be accessed on [http://localhost:4444/graphql](http://localhost:3000/graphql)
 
-```
-{
-  "data": {
-    "newMessage": {
-      "content": "New Message"
-    }
-  }
-}
-```
+## Learn More
 
-### gateway
+To learn more about Next.js, take a look at the following resources:
 
-run the gateway next, cd into gateway, run npm start
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-attempt to use the same subscription as above
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-results in this error:
-
-```
-{
-  "errors": [
-    {
-      "path": [
-        "newMessage"
-      ],
-      "extensions": {},
-      "name": "GraphQLError",
-      "originalError": {},
-      "source": {
-        "locationOffset": {}
-      },
-      "stack": [
-        "GraphQLError",
-        "    at Object.relocatedError (/Users/sgentile/Documents/Workspaces/mesh-subscriptions/gateway/node_modules/@graphql-tools/utils/index.js:3761:12)",
-        "    at mergeDataAndErrors (/Users/sgentile/Documents/Workspaces/mesh-subscriptions/gateway/node_modules/@graphql-tools/delegate/index.js:875:34)",
-        "    at checkResultAndHandleErrors (/Users/sgentile/Documents/Workspaces/mesh-subscriptions/gateway/node_modules/@graphql-tools/delegate/index.js:863:38)",
-        "    at Transformer.transformResult (/Users/sgentile/Documents/Workspaces/mesh-subscriptions/gateway/node_modules/@graphql-tools/delegate/index.js:966:16)",
-        "    at /Users/sgentile/Documents/Workspaces/mesh-subscriptions/gateway/node_modules/@graphql-tools/delegate/index.js:1190:75",
-        "    at /Users/sgentile/Documents/Workspaces/mesh-subscriptions/gateway/node_modules/@graphql-tools/utils/index.js:3693:43",
-        "    at new Promise (<anonymous>)",
-        "    at asyncMapValue (/Users/sgentile/Documents/Workspaces/mesh-subscriptions/gateway/node_modules/@graphql-tools/utils/index.js:3693:12)",
-        "    at mapResult (/Users/sgentile/Documents/Workspaces/mesh-subscriptions/gateway/node_modules/@graphql-tools/utils/index.js:3664:39)",
-        "    at async Object.next (/Users/sgentile/Documents/Workspaces/mesh-subscriptions/gateway/node_modules/graphql/execution/mapAsyncIterator.js:41:24)"
-      ]
-    }
-  ],
-  "data": null
-}
-```
