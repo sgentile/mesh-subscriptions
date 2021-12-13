@@ -9,6 +9,11 @@
     "mesh": "mesh build"
   },
   "dependencies": {
+    "@graphql-mesh/cli": "^0.44.0",
+    "@graphql-mesh/graphql": "^0.20.4",
+    "@graphql-mesh/transform-rename": "^0.11.0",
+    "@graphql-mesh/transform-type-merging": "^0.3.0",
+    "apollo-server-express": "2.17.0",
     "body-parser": "^1.17.2",
     "compression": "^1.7.4",
     "express": "^4.15.3",
@@ -19,14 +24,11 @@
     "graphql-tools": "latest",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.21",
-    "@graphql-mesh/cli": "^0.44.0",
-    "@graphql-mesh/graphql": "^0.20.4",
-    "@graphql-mesh/transform-rename": "^0.11.0",
-    "@graphql-mesh/transform-type-merging": "^0.3.0",
     "next": "12.0.7",
     "prop-types": "^15.5.8",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "reflect-metadata": "^0.1.13",
     "subscriptions-transport-ws": "latest"
   },
   "devDependencies": {
