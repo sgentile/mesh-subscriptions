@@ -7,6 +7,7 @@ const next = require("next");
 const dev = process.env.NODE_ENV !== "production";
 const nextApp = next({ dev });
 const port = process.env.APP_PORT || 4444;
+const url = process.env.BASE_URL || "localhost";
 
 async function main() {
   const expressApp = express();
@@ -33,12 +34,12 @@ async function main() {
   const httpServer = http.createServer(expressApp);
   apolloServer.installSubscriptionHandlers(httpServer);
 
-  httpServer.listen({ port, host: "0.0.0.0" }, () => {
+  httpServer.listen({ port, host: `${url}` }, () => {
     console.log(
-      `🚀 Server ready at http://0.0.0.0:${port}${apolloServer.graphqlPath}`
+      `🚀 Server ready at http://${url}:${port}${apolloServer.graphqlPath}`
     );
     console.log(
-      `🚀 Subscriptions ready at ws://0.0.0.0:${port}${apolloServer.subscriptionsPath}`
+      `🚀 Subscriptions ready at ws://${url}:${port}${apolloServer.subscriptionsPath}`
     );
   });
 }
