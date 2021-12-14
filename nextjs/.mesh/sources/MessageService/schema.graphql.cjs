@@ -26,7 +26,6 @@ type Query {
 type Subscription {
   newMessage: Message!
 }
-
 `, `.mesh/sources/MessageService/schema.graphql`);
 
 module.exports = buildSchema(source, {

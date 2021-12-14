@@ -24,7 +24,7 @@
     "express": "^4.15.3",
     "express-graphql": "^0.12.0",
     "fs": "^0.0.1-security",
-    "graphql": "latest",
+    "graphql": "15.8.0",
     "graphql-server-express": "latest",
     "graphql-subscriptions": "latest",
     "graphql-tools": "latest",
